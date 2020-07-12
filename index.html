@@ -1,65 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selling games</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/style.css">
-    <link rel="stylesheet" href="./styles/styleAuthorizationForm.css">
-</head>
-<body>
-    <div class="wrapper">
-        <section class="container1">
-            <div class="top">
-                <div class="basket" id="basket"><span>Корзина</span></div>
-                <div class="authorization" id="authorization"><i class="far fa-user"></i> <span>Войти</span></div>
-            </div>
-            <div class="logo_info center">
-                <div class="logo"><i class="fas fa-gamepad"></i><span>Games</span></div>
-
-                <nav class="menu" id="menu">
-                    <ul>
-                        <li><a href="#1">О магазине</a></li>
-                        <li><a href="#2">Отзовы</a></li>
-                        <li><a href="#3">Доставка</a></li>
-                        <li><a href="#4">Оплата</a></li>
-                        <li><a href="#5">Гарантия</a></li>
-                    </ul>
-                </nav>
-
-                <div class="phone">
-                    <div class="time"><i class="fas fa-headset"></i> <span>8:00 - 22:00</span></div>
-                    <div class="numder_phone">
-                        <a href="tel:+375177777777">+375 <span>17</span> 777-77-77</a>
-                        <a href="tel:+375177777777">+375 <span>25</span> 777-77-77</a>
-                        <a href="tel:+375177777777">+375 <span>29</span> 777-77-77</a>
-                        <a href="tel:+375177777777">+375 <span>33</span> 777-77-77</a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Selling games</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./styles/style.css" />
+        <link rel="stylesheet" href="./styles/styleAuthorizationForm.css" />
+        <link
+            rel="stylesheet"
+            href="./styles/owlcarousel/owl.carousel.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="./styles/owlcarousel/owl.theme.default.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/swiper/swiper-bundle.min.css"
+        />
+    </head>
+    <body>
+        <div class="wrapper">
+            <section class="container_header">
+                <div class="top">
+                    <div class="bread_crumbs" id="bread_crumbs"></div>
+                    <div class="basket" id="basket"><span>Корзина</span></div>
+                    <div class="authorization" id="authorization">
+                        <i class="far fa-user"></i> <span>Войти</span>
+                    </div>
+                    <div
+                        class="personalArea"
+                        id="personalArea"
+                        style="display: none;"
+                    >
+                        <i class="far fa-user"></i>
+                        <span id="entrancePersonalArea"></span>
                     </div>
                 </div>
-            </div>
+                <div class="logo_info center">
+                    <div class="logo" id="logo">
+                        <i class="fas fa-gamepad"></i><span>Games</span>
+                    </div>
 
-            <div class="search_basket center">
-                <form class="search">
-                    <input placeholder="Искать здесь..." type="search">
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                </form>
-                <div class="wrapper_basket2">
-                    <div class="basket2 center">
-                        <i class="fas fa-shopping-basket"></i>
-                        <div class="counter_products">0</div>
-                        <span>Ваша корзина</span>
+                    <nav class="menu" id="menu">
+                        <ul>
+                            <li><a href="#1">О магазине</a></li>
+                            <li><a href="#2">Отзовы</a></li>
+                            <li><a href="#3">Доставка</a></li>
+                            <li><a href="#4">Оплата</a></li>
+                            <li><a href="#5">Гарантия</a></li>
+                        </ul>
+                    </nav>
+
+                    <div class="phone">
+                        <div class="time">
+                            <i class="fas fa-headset"></i>
+                            <span>8:00 - 22:00</span>
+                        </div>
+                        <div class="numder_phone">
+                            <a href="tel:+375177777777"
+                                >+375 <span>17</span> 777-77-77</a
+                            >
+                            <a href="tel:+375177777777"
+                                >+375 <span>25</span> 777-77-77</a
+                            >
+                            <a href="tel:+375177777777"
+                                >+375 <span>29</span> 777-77-77</a
+                            >
+                            <a href="tel:+375177777777"
+                                >+375 <span>33</span> 777-77-77</a
+                            >
+                        </div>
                     </div>
                 </div>
+
+                <div class="search_basket center">
+                    <form class="search">
+                        <input placeholder="Искать здесь..." type="search" />
+                        <button type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                    <div class="wrapper_basket2">
+                        <div class="basket2 center">
+                            <i class="fas fa-shopping-basket"></i>
+                            <div class="counter_products" id="counter_products">
+                                0
+                            </div>
+                            <span>Ваша корзина</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section
+                class="container_authorization"
+                id="container_authorization"
+                style="display: none;"
+            >
+                <div class="wrapperForm" id="wrapperForm">
+                    <div class="inputForm">
+                        <h1 class="form_title" id="form_title">
+                            <span>Вход</span>
+                        </h1>
+                        <div class="form_group">
+                            <input
+                                type="email"
+                                id="form_inputEmail"
+                                class="form_input"
+                                placeholder=" "
+                            />
+                            <label for="form_inputEmail" class="form_label"
+                                >Email</label
+                            >
+                        </div>
+                        <div class="form_group">
+                            <input
+                                type="password"
+                                id="form_inputPassword"
+                                class="form_input"
+                                placeholder=" "
+                            />
+                            <label for="form_inputPassword" class="form_label"
+                                ><span>Пароль</span></label
+                            >
+                        </div>
+                        <button class="enter_button" id="enter_button">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Войти</span>
+                        </button>
+                        <button class="register_button" id="register_button">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Зарегистрироваться</span>
+                        </button>
+                        <p class="register" id="register">
+                            <span>Зарегистрироваться</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container_carousel" id="container_carousel">
+
+                <div class="swiper-container mainSlider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide introMainSlider picture0" id="picture0"> </div>
+                        <div class="swiper-slide introMainSlider picture1" id="picture1"></div>
+                        <div class="swiper-slide introMainSlider picture2" id="picture2"></div>
+                        <div class="swiper-slide introMainSlider picture3" id="picture3"></div>
+                        <div class="swiper-slide introMainSlider picture4" id="picture4"></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+
+            </section>
+
+            <section
+                class="container_products1 center"
+                id="container_products"
+            >
+                <div class="container_products"></div>
+
+                <div class="products_vert">
+
+                 <div class="swiper-container twoSlider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide inroImg picture1"></div>
+                        <div class="swiper-slide inroImg picture2"></div>
+                        <div class="swiper-slide inroImg picture3"></div>
+                        <div class="swiper-slide inroImg picture4"></div>
+                        <div class="swiper-slide inroImg picture1"></div>
+                        <div class="swiper-slide inroImg picture2"></div>
+                        <div class="swiper-slide inroImg picture3"></div>
+                        <div class="swiper-slide inroImg picture4"></div>
+                    </div>
+                </div>
+
             </div>
+            </section>
+
+             <section class="footer">
+            <nav class="menufooter" id="menufooter">
+                <ul>
+                    <li><a href="#1"><i class="fas fa-thumbs-up"></i> <p>Лучшая цена</p></a></li>
+                    <li><a href="#2"><i class="fas fa-receipt"></i> <p>Гарантия 100%</p></a></li>
+                    <li><a href="#3"><i class="fas fa-hand-holding-usd"></i> <p>Все способы оплаты</p></a></li>
+                    <li><a href="#4"><i class="fas fa-truck"></i> <p>Моментальная доставка</p></a></li>
+                    <li><a href="#5"><i class="fas fa-headset"></i> <p>Техподдержка покупателю</p></a></li>
+                    <li><a href="#6"><i class="fas fa-comments"></i> <p>Тысячи реальных отзовов</p></a></li>
+                    <li><a href="#7"><i class="fas fa-tag"></i> <p>Регулярные акции скидки и бонусы</p></a></li>
+                </ul>
+            </nav>
         </section>
-        <section class="container2">
+        </div>
 
-        </section>
-
-
-    </div>
-    <script src="./scripts/scripts.js"></script>
-</body>
+        <script src="./scripts/formAuthorization.js"></script>
+        <script src="./scripts/scriptCatalog.js"></script>
+        <script src="./scripts/store.js"></script>
+        <script src="./scripts/catalog.js"></script>
+        <script src="./scripts/index.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script>
+            var swiper1 = new Swiper(".mainSlider", {
+                init: true,
+                direction: "horizontal",
+                slidesPerView: 1,
+                /* grabCursor : true, */
+                loop: true,
+                /* mousewheel: true, */
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    dynamicBullets: true,
+                },
+            });
+        </script>
+        <script>
+            var swiper = new Swiper(".twoSlider", {
+                init: true,
+                direction: "vertical",
+                slidesPerView: 4,
+                grabCursor: true,
+                loop: true,
+                mousewheel: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+            });
+        </script>
+    </body>
 </html>
