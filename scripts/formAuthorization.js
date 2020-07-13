@@ -59,7 +59,7 @@ document.querySelector("#personalArea").addEventListener("click", () => {
 
 function formAuthorization() {
     document.getElementById("container_products").style.display = "none";
-    document.getElementById("container_carousel").style.display = 'none';
+    document.getElementById('container_carousel').style.display = 'none';
 
     flagPressing = false;
     formRegister(flagPressing);

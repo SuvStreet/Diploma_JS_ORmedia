@@ -12,16 +12,8 @@
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="./styles/style.css" />
+        <link rel="stylesheet" href="./styles/style.min.css" />
         <link rel="stylesheet" href="./styles/styleAuthorizationForm.css" />
-        <link
-            rel="stylesheet"
-            href="./styles/owlcarousel/owl.carousel.min.css"
-        />
-        <link
-            rel="stylesheet"
-            href="./styles/owlcarousel/owl.theme.default.min.css"
-        />
         <link
             rel="stylesheet"
             href="https://unpkg.com/swiper/swiper-bundle.min.css"
@@ -150,18 +142,20 @@
 
             <section class="container_carousel" id="container_carousel">
 
-                <div class="swiper-container mainSlider">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide introMainSlider picture0" id="picture0"> </div>
-                        <div class="swiper-slide introMainSlider picture1" id="picture1"></div>
-                        <div class="swiper-slide introMainSlider picture2" id="picture2"></div>
-                        <div class="swiper-slide introMainSlider picture3" id="picture3"></div>
-                        <div class="swiper-slide introMainSlider picture4" id="picture4"></div>
+                <!-- <div class="swiper-container mainSlider">
+                    <div class="swiper-wrapper introMainSlider">
+                        <div class="swiper-slide picture" id="picture0"></div>
+                        <div class="swiper-slide picture" id="picture1"></div>
+                        <div class="swiper-slide picture" id="picture2"></div>
+                        <div class="swiper-slide picture" id="picture3"></div>
+                        <div class="swiper-slide picture" id="picture4">
+                            <img src="./images/img_5.jpg" alt="">
+                        </div>
                     </div>
                     <div class="swiper-pagination"></div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
-                </div>
+                </div> -->
 
             </section>
 
@@ -208,6 +202,7 @@
         <script src="./scripts/scriptCatalog.js"></script>
         <script src="./scripts/store.js"></script>
         <script src="./scripts/catalog.js"></script>
+        <script src="./scripts/classScript.js"></script>
         <script src="./scripts/index.js"></script>
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script>
@@ -218,10 +213,10 @@
                 /* grabCursor : true, */
                 loop: true,
                 /* mousewheel: true, */
-                autoplay: {
+                /* autoplay: {
                     delay: 3000,
                     disableOnInteraction: false,
-                },
+                }, */
                 navigation: {
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev",
@@ -244,10 +239,10 @@
                     delay: 3000,
                     disableOnInteraction: false,
                 },
-                pagination: {
+                /* pagination: {
                     el: ".swiper-pagination",
                     clickable: true,
-                },
+                }, */
             });
         </script>
     </body>

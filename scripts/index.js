@@ -5,6 +5,6 @@ document.getElementById('logo').addEventListener('click', () => {
 });
 
 for(let i = 0; i < catalogProducts.length; i++){
-    document.getElementById(`picture${i}`).innerHTML = `<p>${catalogProducts[i].name}</p>`;
+    /* document.getElementById(`picture${i}`).innerHTML = `<p>${catalogProducts[i].name}</p>`; */
 }
 

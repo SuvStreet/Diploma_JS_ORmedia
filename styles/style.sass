@@ -257,27 +257,29 @@
     .mainSlider
         width: 100%
         height: 100%
-        .swiper-wrapper
-            .introMainSlider
-                background-position: center
-                background-repeat: no-repeat
-                background-size: cover 
-            .picture0
-                background-image: url('../images/img_1.jpg')
-            .picture1
-                background-image: url('../images/img_2.jpg')
-            .picture2
-                background-image: url('../images/img_3.jpeg')
-            .picture3
-                background-image: url('../images/img_4.jpg')
-            .picture4
-                background-image: url('../images/img_5.jpg')
-            p
-                font-size: 35px
-                color: white
-                font-weight: 700
-                padding-left: 20px
-                text-shadow: black 0 0 5px
-                padding-top: 250px
-                
+        .introMainSlider
+            .swiper-slide
+                .picture
+                    display: flex
+                    justify-content: space-around
+                    align-items: flex-end
+                    width: 100%
+                    height: 300px
+                    background-position: center
+                    background-size: cover
+                    background-repeat: no-repeat
+                    p, .sale, .priсe
+                        font-size: 35px
+                        color: white
+                        font-weight: 700
+                        //padding-left: 20px
+                        text-shadow: black 0 0 5px
+                        padding-bottom: 20px
+                    .priсe
+                        margin-left: -10%
+                    .sale
+                        margin-left: 20%
+                        border: 5px solid red
+                        padding: 0
+                        margin-bottom: 15px
 
