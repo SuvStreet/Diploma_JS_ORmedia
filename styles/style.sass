@@ -227,11 +227,85 @@
                         background-image: url('../images/img_3.jpeg')
                     .picture4
                         background-image: url('../images/img_4.jpg')
+    .container_carousel
+        height: 300px
+        width: 100%
+        margin-top: 20px
+        cursor: pointer
+        .mainSlider
+            width: 100%
+            height: 100%
+            .introMainSlider
+                .swiper-slide
+                    .picture
+                        display: flex
+                        justify-content: space-around
+                        align-items: flex-end
+                        width: 100%
+                        height: 300px
+                        background-position: center
+                        background-size: cover
+                        background-repeat: no-repeat
+                        p, .sale, .priсe
+                            font-size: 35px
+                            color: white
+                            font-weight: 700
+                            //padding-left: 20px
+                            text-shadow: black 0 0 5px
+                            padding-bottom: 20px
+                        .priсe
+                            margin-left: -10%
+                        .sale
+                            margin-left: 20%
+                            border: 5px solid red
+                            padding: 0
+                            margin-bottom: 15px
+    .infoProduct
+        margin-top: 20px
+        .detailProduct
+            width: 100%
+            display: flex
+            justify-content: space-between
+            
+            .posterProduct
+                width: 60%
+                .bigImage
+                    width: 100%
+                    height: 300px
+                    background-image: url('../images/img_1.jpg')
+                    background-position: center
+                    background-repeat: no-repeat
+                    background-size: cover
+                .sliderImage
+                    width: 100%
+                    height: 200px
+                    .infoProductSlider
+                        .infoProductSliderWrapper
+                            width: 100%
+                            height: 200px
+                            .sliderImage
+                                background-position: center
+                                background-repeat: no-repeat
+                                background-size: cover
+                            #sliderImage0
+                                background-image: url('../images/img_1.jpg')
+                            #sliderImage1
+                                background-image: url('../images/img_2.jpg')
+                            #sliderImage2
+                                background-image: url('../images/img_3.jpeg')
+                            #sliderImage3
+                                background-image: url('../images/img_4.jpg')
+                            #sliderImage4
+                                background-image: url('../images/img_5.jpg')
+            .fastInfoProduct
+                width: 40%
+                //height: 200px
+                background-color: green
 
 .footer
     width: 100%
     height: 300px
-    margin-top: 50px 
+    margin-top: 20px 
     background-color: #c5c5c5
     .menufooter
         padding-top: 50px
@@ -249,37 +323,5 @@
                         padding: 0 10px
                     p
                         text-align: center
-.container_carousel
-    height: 300px
-    width: 100%
-    margin-top: 20px
-    cursor: pointer
-    .mainSlider
-        width: 100%
-        height: 100%
-        .introMainSlider
-            .swiper-slide
-                .picture
-                    display: flex
-                    justify-content: space-around
-                    align-items: flex-end
-                    width: 100%
-                    height: 300px
-                    background-position: center
-                    background-size: cover
-                    background-repeat: no-repeat
-                    p, .sale, .priсe
-                        font-size: 35px
-                        color: white
-                        font-weight: 700
-                        //padding-left: 20px
-                        text-shadow: black 0 0 5px
-                        padding-bottom: 20px
-                    .priсe
-                        margin-left: -10%
-                    .sale
-                        margin-left: 20%
-                        border: 5px solid red
-                        padding: 0
-                        margin-bottom: 15px
+
 

@@ -183,6 +183,30 @@
             </div>
             </section>
 
+            <section class="infoProduct center" id="infoProduct">
+                <div class="detailProduct">
+                    <div class="posterProduct">
+                        <div class="bigImage"></div>
+                        <div class="sliderImage">
+                            <div class="swiper-container infoProductSlider">
+                                <div class="swiper-wrapper infoProductSliderWrapper">
+                                    <div class="swiper-slide sliderImage" id="sliderImage0"></div>
+                                    <div class="swiper-slide sliderImage" id="sliderImage1"></div>
+                                    <div class="swiper-slide sliderImage" id="sliderImage2"></div>
+                                    <div class="swiper-slide sliderImage" id="sliderImage3"></div>
+                                    <div class="swiper-slide sliderImage" id="sliderImage4"></div>
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fastInfoProduct"></div>
+                </div>
+                <div class="detailFullProduct"></div>
+
+            </section>
+
              <section class="footer">
             <nav class="menufooter" id="menufooter">
                 <ul>
@@ -228,7 +252,7 @@
             });
         </script>
         <script>
-            var swiper = new Swiper(".twoSlider", {
+            var swiper2 = new Swiper(".twoSlider", {
                 init: true,
                 direction: "vertical",
                 slidesPerView: 4,
@@ -242,6 +266,27 @@
                 /* pagination: {
                     el: ".swiper-pagination",
                     clickable: true,
+                }, */
+            });
+        </script>
+        <script>
+            var swiper3 = new Swiper(".infoProductSlider", {
+                init: true,
+                direction: "horizontal",
+                slidesPerView: 3,
+                /* loop: true, */
+                /* mousewheel: true, */
+                /* autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                }, */
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                /*pagination: {
+                    el: ".swiper-pagination",
+                    dynamicBullets: true,
                 }, */
             });
         </script>

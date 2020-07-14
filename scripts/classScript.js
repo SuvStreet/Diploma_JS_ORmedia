@@ -4,8 +4,8 @@ class MainSlider {
         this.checkForAvailability();
     }
 
-    checkForAvailability(){
-        if (document.querySelector(".mainSlider") === null){
+    checkForAvailability() {
+        if (document.querySelector(".mainSlider") === null) {
             this.paintSlider();
         }
     }
@@ -53,9 +53,13 @@ class MainSlider {
             slide.appendChild(picture);
             picture.appendChild(text);
 
-            if(this.catalogAllProducts[i].sale !== undefined){
+            if (this.catalogAllProducts[i].sale !== undefined) {
                 picture.appendChild(sale);
             };
+
+            /* let pressPicture = document.getElementById(`picture${i}`) */
+
+
 
             picture.appendChild(priсe);
             wrapperSwiper.appendChild(slide);
@@ -65,6 +69,13 @@ class MainSlider {
         containerSwiper.appendChild(buttonNextSlider);
         containerSwiper.appendChild(buttonPrevSlider);
         sectionContainer.appendChild(containerSwiper);
+
+        for (let i = 0; i < this.catalogAllProducts.length; i++) {
+            document.getElementById(`picture${i}`).addEventListener("click", function () {
+                let infoDetailedProduct = new InfoDetailedProduct(i);
+            })
+        };
+
     }
     getCreateElem(card) {
         let element = document.createElement(card.nameTag);
@@ -91,8 +102,8 @@ class MainSlider {
         }
         return element;
     }
-    sale(i){
-        if(this.catalogAllProducts[i].sale !== undefined){
+    sale(i) {
+        if (this.catalogAllProducts[i].sale !== undefined) {
             let priceSale = (parseInt(this.catalogAllProducts[i].price) * (Math.abs(parseInt(this.catalogAllProducts[i].sale)) / 100));
             let temp = parseInt(this.catalogAllProducts[i].price) - priceSale;
             return temp + " BYN";
@@ -103,3 +114,23 @@ class MainSlider {
 }
 
 let mainSlider = new MainSlider(catalogProducts);
+
+class InfoDetailedProduct {
+    constructor(i){
+        this.getCreateWrapperInfoProduct(i);
+    }
+
+    getCreateWrapperInfoProduct(i) {
+        console.log(i);
+
+        document.getElementById('container_carousel').style.display = 'none';
+        document.getElementById('container_products').style.display = 'none';
+        document.getElementById('infoProduct').style.display = 'flex';
+
+        /* let detailProduct = document.createElement("div");
+        detailProduct.setAttribute("class", "infoDetailedProduct");
+        document.getElementById(`infoProduct`).innerHTML = "";
+        document.getElementById(`infoProduct`).appendChild(detailProduct); */
+    }
+
+}

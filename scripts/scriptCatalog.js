@@ -4,13 +4,14 @@ const catalogProducts = [
         name: "Need for Speed: Rivals",
         image: "./images/img_1.jpg",
         price: "200 BYN",
-        sale: "-10%",
+        
     },
     {
         id: "id1",
         name: "Need for Speed: Heat",
         image: "./images/img_2.jpg",
         price: "100 BYN",
+        sale: "-50%",
     },
     {
         id: "id2",
