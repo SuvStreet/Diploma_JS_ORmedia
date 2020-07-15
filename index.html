@@ -140,6 +140,28 @@
                 </div>
             </section>
 
+            <section class="conteiner_countdown">
+                <div class="countdown">
+                    <div class="time-section">
+                        <span class="count" id="days"></span>
+                        <span class="units">Дней</span>
+                    </div>
+                    <div class="time-section">
+                        <span class="count" id="hours"></span>
+                        <span class="units">Часов</span>
+                    </div>
+                    <div class="time-section">
+                        <span class="count" id="minutes"></span>
+                        <span class="units">Минут</span>
+                    </div>
+                    <div class="time-section">
+                        <span class="count" id="seconds"></span>
+                        <span class="units">Секунд</span>
+                    </div>
+                </div>
+            </section>
+
+
             <section class="container_carousel" id="container_carousel">
 
                 <!-- <div class="swiper-container mainSlider">
@@ -184,6 +206,7 @@
             </section>
 
             <section class="infoProduct center" id="infoProduct">
+                <!-- <div class="nameProduct"></div> 
                 <div class="detailProduct">
                     <div class="posterProduct">
                         <div class="bigImage"></div>
@@ -203,7 +226,7 @@
                     </div>
                     <div class="fastInfoProduct"></div>
                 </div>
-                <div class="detailFullProduct"></div>
+                <div class="detailFullProduct"></div> -->
 
             </section>
 
@@ -222,23 +245,46 @@
         </section>
         </div>
 
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script src="./scripts/formAuthorization.js"></script>
         <script src="./scripts/scriptCatalog.js"></script>
         <script src="./scripts/store.js"></script>
         <script src="./scripts/catalog.js"></script>
+        <!-- <script>
+            var swiper3 = new Swiper(".infoProductSlider", {
+                direction: "horizontal",
+                slidesPerView: 3,
+                observer: true,
+                observeParents: true,
+                /* loop: true, */
+                /* mousewheel: true, */
+                /* autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                }, */
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                /*pagination: {
+                    el: ".swiper-pagination",
+                    dynamicBullets: true,
+                }, */
+            });
+        </script> -->
         <script src="./scripts/classScript.js"></script>
         <script src="./scripts/index.js"></script>
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-        <script>
+
+        <!-- <script>
             var swiper1 = new Swiper(".mainSlider", {
-                init: true,
+                /* init: false, */
                 direction: "horizontal",
                 slidesPerView: 1,
                 /* grabCursor : true, */
                 loop: true,
                 /* mousewheel: true, */
                 /* autoplay: {
-                    delay: 3000,
+                    delay: 1000,
                     disableOnInteraction: false,
                 }, */
                 navigation: {
@@ -250,7 +296,7 @@
                     dynamicBullets: true,
                 },
             });
-        </script>
+        </script> -->
         <script>
             var swiper2 = new Swiper(".twoSlider", {
                 init: true,
@@ -269,26 +315,12 @@
                 }, */
             });
         </script>
-        <script>
-            var swiper3 = new Swiper(".infoProductSlider", {
-                init: true,
-                direction: "horizontal",
-                slidesPerView: 3,
-                /* loop: true, */
-                /* mousewheel: true, */
-                /* autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                }, */
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                },
-                /*pagination: {
-                    el: ".swiper-pagination",
-                    dynamicBullets: true,
-                }, */
-            });
-        </script>
+        
+
+        
+        
+
+
+        
     </body>
 </html>
