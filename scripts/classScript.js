@@ -1,3 +1,90 @@
+class Countdown {
+    constructor(dateEnd, conteinerCountdown, count) {
+        this.conteinerCountdown = document.querySelector(conteinerCountdown);
+        this.count = count;
+        this.dateEnd = dateEnd;
+        this.pictureCountdown(this.conteinerCountdown, this.count, this.dateEnd);
+    }
+
+    countdown(dateEnd, count) {
+        let timer, days, hours, minutes, seconds;
+
+        dateEnd = new Date(dateEnd);
+        dateEnd = dateEnd.getTime();
+
+        if (isNaN(dateEnd)) {
+            return;
+        }
+
+        /* clearTimeout(calculate());*/
+        clearInterval(timer); 
+        /* clearTimeout(timer); */
+        timer = setInterval(calculate, 1000);
+        
+
+        function calculate() {
+            let dateStart = new Date();
+            dateStart = new Date(dateStart.getUTCFullYear(),
+                dateStart.getUTCMonth(),
+                dateStart.getUTCDate(),
+                dateStart.getUTCHours(),
+                dateStart.getUTCMinutes(),
+                dateStart.getUTCSeconds());
+
+            let timeRemaining = parseInt((dateEnd - dateStart.getTime()) / 1000)
+
+            if (timeRemaining >= 0) {
+                days = parseInt(timeRemaining / 86400);
+                timeRemaining = (timeRemaining % 86400);
+                hours = parseInt(timeRemaining / 3600);
+                timeRemaining = (timeRemaining % 3600);
+                minutes = parseInt(timeRemaining / 60);
+                timeRemaining = (timeRemaining % 60);
+                seconds = parseInt(timeRemaining);
+
+                //console.log(document.getElementById(`days${count}`));
+
+                if (document.getElementById(`days${count}`) !== null){
+                    document.getElementById(`days${count}`).innerHTML = parseInt(days, 10);
+                    document.getElementById(`hours${count}`).innerHTML = ("0" + hours).slice(-2);
+                    document.getElementById(`minutes${count}`).innerHTML = ("0" + minutes).slice(-2);
+                    document.getElementById(`seconds${count}`).innerHTML = ("0" + seconds).slice(-2);
+                }
+                
+            }
+            else return;
+        }
+        function display(days, hours, minutes, seconds) { }
+    }
+
+    pictureCountdown(conteinerCountdown, count, dateEnd) {
+
+        /* console.log(conteinerCountdown) */
+        /* console.log(count); */
+
+        conteinerCountdown.innerHTML +=
+            `<div class="countdown">
+                <div class="time-section">
+                    <span class="count" id="days${count}"></span>
+                    <span class="units">Дней</span>
+                </div>
+                <div class="time-section">
+                    <span class="count" id="hours${count}"></span>
+                    <span class="units">Часов</span>
+                </div>
+                <div class="time-section">
+                    <span class="count" id="minutes${count}"></span>
+                    <span class="units">Минут</span>
+                </div>
+                    <div class="time-section">
+                    <span class="count" id="seconds${count}"></span>
+                    <span class="units">Секунд</span>
+                </div>
+            </div>`;
+        this.countdown(dateEnd, count);
+    }
+}
+
 class MainSlider {
     constructor(catalogAllProducts) {
         this.catalogAllProducts = catalogAllProducts;
@@ -39,6 +126,10 @@ class MainSlider {
                 nameTag: "p",
                 nameProduct: this.catalogAllProducts[i].name,
             });
+
+            let wrapperSalePrice = document.createElement("div");
+            wrapperSalePrice.setAttribute("class", "wrapperSalePrice");
+
             let sale = this.getCreateElem({
                 nameTag: "div",
                 nameClass: `sale`,
@@ -54,10 +145,11 @@ class MainSlider {
             picture.appendChild(text);
 
             if (this.catalogAllProducts[i].sale !== undefined) {
-                picture.appendChild(sale);
+                wrapperSalePrice.appendChild(sale);
             };
 
-            picture.appendChild(priсe);
+            picture.appendChild(wrapperSalePrice);
+            wrapperSalePrice.appendChild(priсe);
             wrapperSwiper.appendChild(slide);
         }
         containerSwiper.appendChild(wrapperSwiper);
@@ -69,14 +161,14 @@ class MainSlider {
         var swiper1 = new Swiper(".mainSlider", {
             direction: "horizontal",
             slidesPerView: 1,
-            
+
             /* grabCursor : true, */
-            loop: true,
+            /* loop: true, */
             /* mousewheel: true, */
-            autoplay: {
+            /* autoplay: {
                 delay: 5000,
                 disableOnInteraction: false,
-            },
+            }, */
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
@@ -89,12 +181,17 @@ class MainSlider {
 
         for (let i = 0; i < this.catalogAllProducts.length; i++) {
             document.getElementById(`picture${i}`).addEventListener("click", function () {
-                console.log(swiper1.clickedIndex);	
-                console.log(swiper1.clickedSlide);
+                /* console.log(swiper1.clickedIndex);
+                console.log(swiper1.clickedSlide); */
                 let infoDetailedProduct = new InfoDetailedProduct(mainSlider.catalogAllProducts, i, mainSlider.catalogAllProducts[i].imageSlider);
             })
         };
 
+        for (let i = 0; i < catalogProducts.length; i++) {
+            if (catalogProducts[i].timeSale !== undefined && catalogProducts[i].timeSale !== "") {
+                let countdown = new Countdown(catalogProducts[i].timeSale, `#picture${i}`, i);
+            }
+        }
     }
     getCreateElem(card) {
         let element = document.createElement(card.nameTag);
@@ -122,7 +219,7 @@ class MainSlider {
         return element;
     }
     sale(i) {
-        if (this.catalogAllProducts[i].sale !== undefined) {
+        if (this.catalogAllProducts[i].sale !== undefined && this.catalogAllProducts[i].sale !== "") {
             let priceSale = (parseInt(this.catalogAllProducts[i].price) * (Math.abs(parseInt(this.catalogAllProducts[i].sale)) / 100));
             let temp = parseInt(this.catalogAllProducts[i].price) - priceSale;
             return temp + " BYN";
@@ -135,7 +232,7 @@ class MainSlider {
 let mainSlider = new MainSlider(catalogProducts);
 
 class InfoDetailedProduct {
-    constructor(catalogAllProducts, i, imageSlider){
+    constructor(catalogAllProducts, i, imageSlider) {
         this.catalogAllProducts = catalogAllProducts;
         this.imageSlider = imageSlider;
         this.getCreateWrapperInfoProduct(i, imageSlider);
@@ -143,7 +240,7 @@ class InfoDetailedProduct {
     }
 
     getCreateWrapperInfoProduct(i, imageSlider) {
-        if (this.imageSlider !== undefined && this.imageSlider.length !== 0){
+        if (this.imageSlider !== undefined && this.imageSlider.length !== 0) {
             let sectionInfoProduct = document.getElementById('infoProduct');
 
             document.getElementById('container_carousel').style.display = 'none';
@@ -159,32 +256,35 @@ class InfoDetailedProduct {
             let posterProduct = document.createElement('div');
             posterProduct.setAttribute("class", "posterProduct");
             detailProduct.appendChild(posterProduct);
-    
+
             let fastInfoProduct = document.createElement('div');
             fastInfoProduct.setAttribute("class", "fastInfoProduct");
+            fastInfoProduct.innerHTML += `<h3>СКИДКА НА ИГРУ ЗАКАНЧИВАЕТСЯ ЧЕРЕЗ</h3>`;
             detailProduct.appendChild(fastInfoProduct);
 
             let bigImage = document.createElement('div');
             bigImage.setAttribute("class", "bigImage");
             bigImage.setAttribute("id", "bigImage");
             posterProduct.appendChild(bigImage);
-    
+
             let sliderImage = document.createElement('div');
             sliderImage.setAttribute("class", "sliderImage");
             /* console.log(this.getPaintSliderProduct(sliderImage)); */
-    
+
             posterProduct.appendChild(this.getPaintSliderProduct(sliderImage));
-    
+
             for (let i = 0; i < this.imageSlider.length; i++) {
-                document.getElementById(`sliderImage${i}`).style.backgroundImage = `url('${this.imageSlider[i]}')`;
+                document.getElementById(`sliderImage${i}`).style.backgroundImage = `url('${imageSlider[i]}')`;
             }
+
+            this.paintFastInfoProduct(i);
 
             var swiper3 = new Swiper(".infoProductSlider", {
                 direction: "horizontal",
                 slidesPerView: 3,
                 observer: true,
                 observeParents: true,
-                spaceBetween : 5,
+                spaceBetween: 5,
                 /* loop: true, */
                 mousewheel: true,
                 /* autoplay: {
@@ -202,21 +302,19 @@ class InfoDetailedProduct {
             });
         }
     }
-    getNameProduct(i){
+    getNameProduct(i) {
         let nameProduct = document.createElement('div');
         nameProduct.setAttribute("class", "nameProduct");
-        
         nameProduct.innerHTML +=
-        `<p>${this.catalogAllProducts[i].name}</p>`
-
+            `<p>${this.catalogAllProducts[i].name}</p>`
         return nameProduct;
     }
-    getPaintSliderProduct(sliderImage){
+    getPaintSliderProduct(sliderImage) {
         /* console.log(sliderImage); */
 
         let infoProductSliderWrapper = document.createElement('div');
         infoProductSliderWrapper.setAttribute("class", "swiper-wrapper infoProductSliderWrapper");
-        
+
         let infoProductSlider = document.createElement('div');
         infoProductSlider.setAttribute("class", "swiper-container infoProductSlider");
         infoProductSlider.appendChild(infoProductSliderWrapper);
@@ -228,7 +326,7 @@ class InfoDetailedProduct {
 
         infoProductSlider.appendChild(buttonNextSlider);
         infoProductSlider.appendChild(buttonPrevSlider);
-        
+
         for (let i = 0; i < this.imageSlider.length; i++) {
             let sliderPicture = document.createElement('div');
             sliderPicture.setAttribute("class", "swiper-slide sliderImage");
@@ -240,66 +338,28 @@ class InfoDetailedProduct {
 
         return sliderImage;
     }
-    pressPictureSlide(imageSlider){
-        document.getElementById('bigImage').style.backgroundImage = `url('${this.imageSlider[0]}')`;
+    pressPictureSlide(imageSlider) {
+        document.getElementById('bigImage').style.backgroundImage = `url('${imageSlider[0]}')`;
         for (let i = 0; i < imageSlider.length; i++) {
             document.getElementById(`sliderImage${i}`).addEventListener("click", function () {
-                document.getElementById('bigImage').style.backgroundImage = `url('${imageSlider[i]}')`; 
+                document.getElementById('bigImage').style.backgroundImage = `url('${imageSlider[i]}')`;
             })
         };
     }
+    paintFastInfoProduct(i){
+        document.getElementById('container_carousel').innerHTML = '';
+        
+        /* console.log(i); */
 
-}
-
-//let infoDetailedProduct = new InfoDetailedProduct(catalogProducts, 0, catalogProducts[0].imageSlider);
-
-class Countdown{
-    constructor(dateEnd){
-        this.dateEnd = dateEnd;
-        this.countdown(dateEnd);
-    }
-    
-    countdown(dateEnd){
-        let timer, days, hours, minutes, seconds;
-
-        dateEnd = new Date(dateEnd);
-        dateEnd = dateEnd.getTime();
-
-        if (isNaN(dateEnd)){
-            return;
-        }
-
-        timer = setInterval(calculate, 1000);
-
-        function calculate() {
-            let dateStart = new Date();
-            dateStart = new Date(dateStart.getUTCFullYear(),
-                dateStart.getUTCMonth(),
-                dateStart.getUTCDate(),
-                dateStart.getUTCHours(),
-                dateStart.getUTCMinutes(),
-                dateStart.getUTCSeconds());
-
-            let timeRemaining = parseInt((dateEnd - dateStart.getTime()) / 1000)
-
-            if (timeRemaining >= 0){
-                days = parseInt(timeRemaining / 86400);
-                timeRemaining = (timeRemaining % 86400);
-                hours = parseInt(timeRemaining / 3600);
-                timeRemaining = (timeRemaining % 3600);
-                minutes = parseInt(timeRemaining / 60);
-                timeRemaining = (timeRemaining % 60);
-                seconds = parseInt(timeRemaining);
-
-                document.getElementById('days').innerHTML = parseInt(days, 10);
-                document.getElementById('hours').innerHTML = ("0" + hours).slice(-2);
-                document.getElementById('minutes').innerHTML = ("0" + minutes).slice(-2);
-                document.getElementById('seconds').innerHTML = ("0" + seconds).slice(-2);
-            }
-            else return;
-        }
-        function display(days, hours, minutes, seconds) {}
+       /*  document.querySelector(".fastInfoProduct").innerHTML =
+        `<div class="x"></div>`; */
+        let countdown = new Countdown(catalogProducts[i].timeSale, `.fastInfoProduct`, i);
     }
 }
 
-let countdown = new Countdown("9/5/2020 00:00:00 AM");
+let infoDetailedProduct = new InfoDetailedProduct(catalogProducts, 0, catalogProducts[0].imageSlider);
+
+
+
+/* let countdown = new Countdown("9/5/2020 00:00:00 AM", "#picture1", 1); */
+/* let countdown1 = new Countdown("9/5/2020 00:00:00 AM", "#conteiner_countdown", 1); */

@@ -246,20 +246,62 @@
                         background-position: center
                         background-size: cover
                         background-repeat: no-repeat
-                        p, .sale, .priсe
+                        //.conteiner_countdown
+                        //   display: flex
+                        //    justify-content: center
+                        //    align-items: center
+                        //    min-height: 20vh
+                        //    margin: 0
+                        //    padding: 0
+                        //    background: #354773
+                        p
                             font-size: 35px
                             color: white
                             font-weight: 700
-                            //padding-left: 20px
                             text-shadow: black 0 0 5px
                             padding-bottom: 20px
-                        .priсe
-                            margin-left: -10%
-                        .sale
-                            margin-left: 20%
-                            border: 5px solid red
-                            padding: 0
-                            margin-bottom: 15px
+                        .wrapperSalePrice
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            .priсe, .sale
+                                color: white
+                                font-weight: 700
+                                margin-bottom: 15px
+                                text-shadow: black 0 0 5px
+                                margin-right: 10px
+                            .priсe
+                                font-size: 32px
+                                border: 2px solid red
+                                padding: 0
+                            .sale
+                                font-size: 35px
+                                background: red
+                                padding: 0 5px
+                    .countdown
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        position: absolute
+                        top: 10px
+                        right: 10px
+                        background: rgba(0, 0, 255, 0.5)
+                        padding: 5px 0
+                        .time-section
+                            display: flex
+                            flex-direction: column
+                            justify-content: center
+                            align-items: center
+                            color: #fff
+                            padding: 0 30px
+                            border-right: 1px solid #fff
+                            user-select: none
+                            &:last-child
+                                border: none
+                            .count
+                                font-size: 50px
+                            .units
+                                font-size: 15px
     .infoProduct
         flex-direction: column
         padding-top: 20px
@@ -295,34 +337,33 @@
                                 background-size: cover
             .fastInfoProduct
                 width: 40%
-    
-    .conteiner_countdown
-        display: flex
-        justify-content: center
-        align-items: center
-        min-height: 20vh
-        margin: 0
-        padding: 0
-        background: #354773
-        .countdown
-            display: flex
-            justify-content: center
-            align-items: center
-            .time-section
-                display: flex
-                flex-direction: column
-                justify-content: center
-                align-items: center
-                color: #fff
-                padding: 0 30px
-                border-right: 1px solid #fff
-                user-select: none
-                &:last-child
-                    border: none
-                .count
-                    font-size: 50px
-                .units
-                    font-size: 15px
+                h3
+                    padding: 0 5px
+                    margin-bottom: 10x
+                    color: grey
+                .countdown
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    padding: 5px 0
+                    .time-section
+                        display: flex
+                        flex-direction: column
+                        justify-content: center
+                        align-items: center
+                        color: blue
+                        padding: 0 15px
+                        user-select: none
+                        .count
+                            padding: 10px
+                            border: 2px solid blue
+                            font-size: 20px
+                        .units
+                            text-transform: lowercase
+                            padding-top: 10px
+                            font-size: 15px
+                            color: gray
+
 
 .footer
     width: 100%
