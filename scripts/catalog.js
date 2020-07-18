@@ -100,3 +100,5 @@ let allProducts = new AllProducts(
     catalogProducts,
     ".counter_products"
 );
+
+

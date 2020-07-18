@@ -5,6 +5,7 @@ document.getElementById('logo').addEventListener('click', () => {
     document.getElementById('infoProduct').innerHTML = '';
     mainSlider = new MainSlider(catalogProducts);
     document.getElementById('container_products').style.display = 'flex';
+    document.getElementById('cart').innerHTML = "";
 });
 
 

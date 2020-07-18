@@ -17,10 +17,10 @@ class Countdown {
         }
 
         /* clearTimeout(calculate());*/
-        clearInterval(timer); 
+        clearInterval(timer);
         /* clearTimeout(timer); */
         timer = setInterval(calculate, 1000);
-        
+
 
         function calculate() {
             let dateStart = new Date();
@@ -44,13 +44,13 @@ class Countdown {
 
                 //console.log(document.getElementById(`days${count}`));
 
-                if (document.getElementById(`days${count}`) !== null){
+                if (document.getElementById(`days${count}`) !== null) {
                     document.getElementById(`days${count}`).innerHTML = parseInt(days, 10);
                     document.getElementById(`hours${count}`).innerHTML = ("0" + hours).slice(-2);
                     document.getElementById(`minutes${count}`).innerHTML = ("0" + minutes).slice(-2);
                     document.getElementById(`seconds${count}`).innerHTML = ("0" + seconds).slice(-2);
                 }
-                
+
             }
             else return;
         }
@@ -259,7 +259,6 @@ class InfoDetailedProduct {
 
             let fastInfoProduct = document.createElement('div');
             fastInfoProduct.setAttribute("class", "fastInfoProduct");
-            fastInfoProduct.innerHTML += `<h3>СКИДКА НА ИГРУ ЗАКАНЧИВАЕТСЯ ЧЕРЕЗ</h3>`;
             detailProduct.appendChild(fastInfoProduct);
 
             let bigImage = document.createElement('div');
@@ -270,6 +269,10 @@ class InfoDetailedProduct {
             let sliderImage = document.createElement('div');
             sliderImage.setAttribute("class", "sliderImage");
             /* console.log(this.getPaintSliderProduct(sliderImage)); */
+
+            let detailFullProduct = document.createElement('div');
+            detailFullProduct.setAttribute("class", "detailFullProduct");
+            sectionInfoProduct.appendChild(detailFullProduct);
 
             posterProduct.appendChild(this.getPaintSliderProduct(sliderImage));
 
@@ -346,20 +349,181 @@ class InfoDetailedProduct {
             })
         };
     }
-    paintFastInfoProduct(i){
-        document.getElementById('container_carousel').innerHTML = '';
-        
+    paintFastInfoProduct(i) {
+
         /* console.log(i); */
 
-       /*  document.querySelector(".fastInfoProduct").innerHTML =
-        `<div class="x"></div>`; */
-        let countdown = new Countdown(catalogProducts[i].timeSale, `.fastInfoProduct`, i);
+        /*  document.querySelector(".fastInfoProduct").innerHTML =
+         `<div class="x"></div>`; */
+        if (catalogProducts[i].timeSale !== undefined && catalogProducts[i].timeSale !== "") {
+            document.getElementById('container_carousel').innerHTML = '';
+            document.querySelector(".fastInfoProduct").innerHTML += `<h3>СКИДКА НА ИГРУ ЗАКАНЧИВАЕТСЯ ЧЕРЕЗ</h3>`;
+            let countdown = new Countdown(catalogProducts[i].timeSale, `.fastInfoProduct`, i);
+        }
+
+        if (true) {
+            document.querySelector(".fastInfoProduct").innerHTML +=
+                `<div class="wraperInfoPrice">
+                <div class="infoPrice">
+                    <div>
+                        <div class="realPrice">${catalogProducts[i].price}</div>
+                        <div class="sale">${catalogProducts[i].sale}</div>
+                    </div>
+                    <div class="price">${mainSlider.sale(i)}</div>
+                </div>
+                <div>
+                    <div class="saving">Экономия: ${parseInt(this.catalogAllProducts[i].price) * (Math.abs(parseInt(this.catalogAllProducts[i].sale)) / 100)} BYN</div>
+                    <div class="pay"><button>В корзину</button></div>
+                </div>
+            </div>
+            <div class="wraperinfo">
+                <ul>
+                    <li><p>Платформа: <span>${catalogProducts[i].platformOS}</span></p></li>
+                    <li><p>Жанр: <span>${catalogProducts[i].genre}</span></p></li>
+                    <li><p>Издатель: <span>${catalogProducts[i].publisher}</span></p></li>
+                    <li><p>Дата выхода: <span>${catalogProducts[i].releaseDate}</span></p></li>
+                </ul>
+            </div>`;
+        }
+        this.paintDtailFullProduct(i);
+    }
+
+    paintDtailFullProduct(i) {
+        document.querySelector(".detailFullProduct").innerHTML =
+            `<div>
+            <h2>Описание</h2>
+            <div>
+                ${catalogProducts[i].description}
+            </div>
+        </div>`;
     }
 }
 
-let infoDetailedProduct = new InfoDetailedProduct(catalogProducts, 0, catalogProducts[0].imageSlider);
+//let infoDetailedProduct = new InfoDetailedProduct(catalogProducts, 0, catalogProducts[0].imageSlider);
 
 
 
 /* let countdown = new Countdown("9/5/2020 00:00:00 AM", "#picture1", 1); */
 /* let countdown1 = new Countdown("9/5/2020 00:00:00 AM", "#conteiner_countdown", 1); */
+
+class Basket {
+    constructor() {
+        this.pressBasket();
+        this.getArrCart();
+    }
+
+    getArrCart() {
+        let productsInCart = JSON.parse(localStorage.getItem("StoreProducts"));
+        let arrCart = [];
+        for (let i = 0; i < productsInCart.length; i++) {
+            for (let j = 0; j < catalogProducts.length; j++) {
+                if (productsInCart[i] === catalogProducts[j].id) {
+                    arrCart.push(catalogProducts[j]);
+                }
+            }
+        }
+        return arrCart;
+    }
+
+    pressBasket() {
+        document.getElementById('basket').addEventListener('click', function () {
+            basket.opacityDiv();
+            if (document.querySelector(".wrapperCartProduct") === null) {
+                basket.workCart();
+            }
+        });
+        document.getElementById('basket2').addEventListener('click', function () {
+            basket.opacityDiv();
+            if (document.querySelector(".wrapperCartProduct") === null) {
+                basket.workCart();
+            }
+        });
+    }
+
+    opacityDiv() {
+        document.getElementById('container_carousel').innerHTML = "";
+        document.getElementById('container_products').style.display = 'none';
+        document.getElementById('infoProduct').innerHTML = "";
+        document.getElementById('container_authorization').style.display = "none";
+    }
+
+
+    workCart() {
+        let products = this.getArrCart();
+        let cart = document.getElementById('cart');
+
+        //console.log(productsInCart.length);
+
+        if (localStorage.getItem("StoreProducts") !== "[]") {
+
+            //console.log("Корзина не пуста");
+
+            let wrapperCartProduct;
+
+            for (let i = 0; i < products.length; i++) {
+                wrapperCartProduct = document.createElement('div');
+                wrapperCartProduct.setAttribute("class", "wrapperCartProduct");
+
+                //console.log(products[i].image);
+
+                wrapperCartProduct.innerHTML =
+                    `<div class="wrapperImg">
+                        <img src="${products[i].image}" />
+                    </div>
+                    <p>${products[i].name}</p>
+                    <div class="addProductSubtract">
+                        <div class="plus"><i class="fas fa-plus-square" data-articul="${products[i].id}"></i></div>
+                        <div><span id="${products[i].id}">${products[i].quantity}</span></div>
+                        <div class="minus"><i class="fas fa-minus-square" data-articul="${products[i].id}"></i></div>
+                    </div>
+                    <div class="priceCartProduct" id="price${products[i].id}">${products[i].price} BYN</div>`;
+                cart.appendChild(wrapperCartProduct);
+            }
+            this.pressPlusMinus(products);
+        }
+        else {
+            console.log("Корзина пуста");
+        }
+    }
+
+    pressPlusMinus(products) {
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains("fa-plus-square")) {
+                basket.plus(event.target.dataset.articul, products);
+            }
+            if (event.target.classList.contains("fa-minus-square")) {
+                basket.minus(event.target.dataset.articul, products);
+            }
+        })
+    }
+
+    plus(id, products) {
+        for (let i = 0; i < products.length; i++) {
+            if (products[i].id === id) {
+                if (products[i].quantity !== 5) {
+                    products[i].quantity += 1;
+                }
+                document.getElementById(`price${products[i].id}`).innerText = `${products[i].price * products[i].quantity} BYN`;
+                document.getElementById(id).innerText = `${products[i].quantity}`;
+            }
+        }
+    }
+
+    minus(id, products) {
+        for (let i = 0; i < products.length; i++) {
+            if (products[i].id === id) {
+                if (products[i].quantity !== 1) {
+                    products[i].quantity -= 1;
+                }
+                document.getElementById(`price${products[i].id}`).innerText = `${products[i].price * products[i].quantity} BYN`;
+                document.getElementById(id).innerText = `${products[i].quantity}`;
+            }
+        }
+    }
+}
+
+let basket = new Basket();
+/*basket.opacityDiv();
+basket.workCart();
+ */
+//console.log(basket.arrCart());
