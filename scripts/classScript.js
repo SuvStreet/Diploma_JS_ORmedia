@@ -514,7 +514,7 @@ class Basket {
         //document.querySelector('.products_vert').innerHTML = "";
         document.getElementById('infoProduct').innerHTML = "";
         document.getElementById('container_authorization').style.display = "none";
-        document.getElementById('catalog_products').style.display = 'none';
+        document.getElementById('catalog_products').innerHTML = '';
     }
 
 
@@ -677,6 +677,12 @@ class Catalog{
             document.getElementById('container_carousel').innerHTML = "";
             document.getElementById('mainPage').innerHTML = "";
             document.getElementById('catalog_products').style.display = 'flex';
+
+            let allProducts = new AllProducts(
+                ".catalog_products",
+                catalogProducts,
+                ".counter_products"
+            );
         })
     }
 }

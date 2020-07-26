@@ -14,6 +14,10 @@ class AllProducts {
         </div> */
 
     createProducts() {
+        //let container_products = document.querySelector('#container_products');
+        let container_products = document.createElement("div");
+        container_products.setAttribute("class", "container_products");
+
         let wrapper = document.createElement("slot");
         let products = store.getProducts();
 
@@ -75,7 +79,8 @@ class AllProducts {
             wrapper.appendChild(item);
         }
         this.containerProducts.innerHTML = "";
-        this.containerProducts.appendChild(wrapper);
+        this.containerProducts.appendChild(container_products);
+        container_products.appendChild(wrapper);
     }
 
     getProductItem(card) {
@@ -97,7 +102,7 @@ class AllProducts {
 }
 
 let allProducts = new AllProducts(
-    ".container_products",
+    ".catalog_products",
     catalogProducts,
     ".counter_products"
 );

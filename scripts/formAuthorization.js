@@ -58,11 +58,12 @@ document.querySelector("#personalArea").addEventListener("click", () => {
 });
 
 function formAuthorization() {
-    document.getElementById("catalog_products").style.display = "none";
+    document.getElementById("catalog_products").innerHTML = '';
     document.getElementById('container_carousel').innerHTML = '';
     document.getElementById('infoProduct').innerHTML = '';
     document.querySelector('.mainPage').innerHTML = "";
-    
+    document.getElementById('cart').innerHTML = "";
+
     flagPressing = false;
     formRegister(flagPressing);
 }
