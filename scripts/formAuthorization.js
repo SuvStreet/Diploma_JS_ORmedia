@@ -58,10 +58,11 @@ document.querySelector("#personalArea").addEventListener("click", () => {
 });
 
 function formAuthorization() {
-    document.getElementById("container_products").style.display = "none";
+    document.getElementById("catalog_products").style.display = "none";
     document.getElementById('container_carousel').innerHTML = '';
     document.getElementById('infoProduct').innerHTML = '';
-
+    document.querySelector('.mainPage').innerHTML = "";
+    
     flagPressing = false;
     formRegister(flagPressing);
 }

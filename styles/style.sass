@@ -165,12 +165,8 @@
                 span
                     padding-left: 10px
                     font-size: 17px
-    .container_products1
-        width: 90%
-        display: flex
-        justify-content: space-around
-        .container_products
-            width: 55%
+    .container_products
+            width: 100%
             padding-top: 20px
             .item
                 display: flex
@@ -206,7 +202,11 @@
                 height: 50px
                 margin-right: 20px
                 cursor: pointer
-        .products_vert
+    .container_products1
+        width: 90%
+        display: flex
+        justify-content: space-around
+        /** .products_vert
             margin-top: 30px
             width: 35%
             height: 500px
@@ -226,7 +226,7 @@
                     .picture3
                         background-image: url('../images/img_3.jpeg')
                     .picture4
-                        background-image: url('../images/img_4.jpg')
+                        background-image: url('../images/img_4.jpg') **/
     .container_carousel
         //height: 300px
         //width: 100%
@@ -302,6 +302,25 @@
                                 font-size: 50px
                             .units
                                 font-size: 15px
+    .buttonCatalogProducts
+        margin-top: 20px
+        display: flex
+        justify-content: center
+        align-items: center
+        button
+            width: 90%
+            height: 50px
+            cursor: pointer
+            i, span
+                font-size: 20px
+            i
+                padding-right: 20px
+            span
+                text-transform: uppercase
+                font-weight: 700
+
+            
+        
     .infoProduct
         flex-direction: column
         //padding-top: 20px
@@ -407,7 +426,43 @@
                                 span
                                     font-weight: 400
         .detailFullProduct
-            margin-top: 50px
+            margin-top: 25px
+            .description
+                font-size: 20px
+            h2
+                margin-top: 25px
+            ul
+                li
+                    padding: 5px 0
+                    p
+                        display: inline-block
+                        font-size: 20px
+                        font-weight: 700
+                        background: blue
+                        color: white
+                        padding-left: 5px
+                        span
+                            background: white
+                            color: black
+                            font-weight: 400
+                            padding-left: 5px
+            .reviews
+                border-top: 2px solid black
+                margin-top: 10px
+                h2
+                   margin-top: 10px 
+                .reviewsForm
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    padding-top: 15px
+                    input
+                        width: 80%
+                        height: 50px
+                    button
+                        width: 20%
+                        height: 54px
+                    
     .cart
         .emptyBasket
             text-align: center

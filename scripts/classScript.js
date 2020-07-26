@@ -165,10 +165,10 @@ class MainSlider {
             /* grabCursor : true, */
             /* loop: true, */
             /* mousewheel: true, */
-            /* autoplay: {
+            autoplay: {
                 delay: 5000,
                 disableOnInteraction: false,
-            }, */
+            },
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
@@ -231,10 +231,24 @@ class MainSlider {
         }
         else return this.catalogAllProducts[i].price;
     }
-
 }
 
 let mainSlider = new MainSlider(catalogProducts);
+
+class MainPage{
+    constructor() {
+        this.printMainInfoSyte();
+    }
+
+    printMainInfoSyte(){
+        document.getElementById('mainPage').innerHTML = 
+        `<div class="buttonCatalogProducts">
+            <button id="buttonCatalogProducts"><i class="fas fa-th-list"></i><span>Показать весь каталог</span></button>
+        </div>`;
+    }
+}
+
+let mainPage = new MainPage();
 
 class InfoDetailedProduct {
     constructor(catalogAllProducts, i, imageSlider) {
@@ -248,8 +262,9 @@ class InfoDetailedProduct {
         if (this.imageSlider !== undefined && this.imageSlider.length !== 0) {
             let sectionInfoProduct = document.getElementById('infoProduct');
 
-            document.getElementById('container_carousel').style.display = 'none';
-            document.getElementById('container_products').style.display = 'none';
+            document.getElementById('container_carousel').innerHTML = '';
+            document.querySelector('.mainPage').innerHTML = "";
+            //document.getElementById('container_products').style.display = 'none';
             sectionInfoProduct.style.display = 'flex';
 
             sectionInfoProduct.appendChild(this.getNameProduct(i));
@@ -422,11 +437,31 @@ class InfoDetailedProduct {
     paintDtailFullProduct(i) {
         document.querySelector(".detailFullProduct").innerHTML =
             `<div>
-            <h2>Описание</h2>
-            <div>
-                ${catalogProducts[i].description}
+                <h2>Описание</h2>
+                <div class="description">
+                    ${catalogProducts[i].description}
+                </div>
+                <h2>Системные требования</h2>
+                <div class="systemRequirements">
+                    <ul>
+                        <li><p>ОС: <span>${catalogProducts[i].systemRequirements.os}</span></p></li>
+                        <li><p>Процессор: <span>${catalogProducts[i].systemRequirements.cpu}</span></p></li>
+                        <li><p>Оперативная память: <span>${catalogProducts[i].systemRequirements.ram}</span></p></li>
+                        <li><p>Видеокарта: <span>${catalogProducts[i].systemRequirements.videoCard}</span></p></li>
+                        <li><p>Жесткий диск: <span>${catalogProducts[i].systemRequirements.hdd}</span></p></li>
+                    </ul>
+                </div>
             </div>
-        </div>`;
+            <div class="reviews">
+                <h2>Отзовы пользователей</h2>
+                <form class="reviewsForm">
+                    <input placeholder="Ваш коментарий" type="" />
+                        <button type="submit">
+                            <i class="fas fa-comment-dots"></i>
+                        </button>
+                    </form>
+            </div>`
+        ;
     }
 }
 
@@ -473,11 +508,13 @@ class Basket {
 
     opacityDiv() {
         document.getElementById('container_carousel').innerHTML = "";
-        document.getElementById('container_products').style.display = 'none';
-        document.querySelector('.container_products').innerHTML = "";
-        document.querySelector('.products_vert').innerHTML = "";
+        //document.getElementById('container_products').style.display = 'none';
+        //document.querySelector('.container_products').innerHTML = "";
+        document.querySelector('.mainPage').innerHTML = "";
+        //document.querySelector('.products_vert').innerHTML = "";
         document.getElementById('infoProduct').innerHTML = "";
         document.getElementById('container_authorization').style.display = "none";
+        document.getElementById('catalog_products').style.display = 'none';
     }
 
 
@@ -629,7 +666,19 @@ class Basket {
 }
 
 let basket = new Basket();
-basket.opacityDiv();
-basket.workCart();
 
-//console.log(basket.arrCart());
+class Catalog{
+    constructor(){
+        this.printCatalog();
+    }
+
+    printCatalog(){
+        document.getElementById('buttonCatalogProducts').addEventListener('click', () => {
+            document.getElementById('container_carousel').innerHTML = "";
+            document.getElementById('mainPage').innerHTML = "";
+            document.getElementById('catalog_products').style.display = 'flex';
+        })
+    }
+}
+
+let catalog = new Catalog();
