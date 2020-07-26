@@ -74,6 +74,7 @@ class AllProducts {
             item.appendChild(btn);
             wrapper.appendChild(item);
         }
+        this.containerProducts.innerHTML = "";
         this.containerProducts.appendChild(wrapper);
     }
 

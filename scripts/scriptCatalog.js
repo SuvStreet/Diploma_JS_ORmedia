@@ -131,7 +131,7 @@ const catalogProducts = [
     {
         id: "id4",
         quantity: 1,
-        name: "Need for Speed: Underground2",
+        name: "Need for Speed: Underground II",
         image: "./images/img_5.jpg",
         price: 50,
         sale: "",
@@ -152,7 +152,7 @@ const catalogProducts = [
     {
         id: "id5",
         quantity: 1,
-        name: "Need for Speed: Underground1",
+        name: "Need for Speed: Underground I",
         image: "./images/img_6.jpg",
         price: 20,
         sale: "-20%",

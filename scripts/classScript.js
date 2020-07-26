@@ -183,6 +183,11 @@ class MainSlider {
             document.getElementById(`picture${i}`).addEventListener("click", function () {
                 /* console.log(swiper1.clickedIndex);
                 console.log(swiper1.clickedSlide); */
+
+
+                //console.log(mainSlider.catalogAllProducts);
+                //console.log(mainSlider.catalogAllProducts[i].imageSlider);
+
                 let infoDetailedProduct = new InfoDetailedProduct(mainSlider.catalogAllProducts, i, mainSlider.catalogAllProducts[i].imageSlider);
             })
         };
@@ -214,7 +219,7 @@ class MainSlider {
             element.innerText = card.saleProduct;
         }
         if ("priсeProduct" in card) {
-            element.innerText = card.priсeProduct;
+            element.innerText = card.priсeProduct + " BYN";
         }
         return element;
     }
@@ -222,7 +227,7 @@ class MainSlider {
         if (this.catalogAllProducts[i].sale !== undefined && this.catalogAllProducts[i].sale !== "") {
             let priceSale = (parseInt(this.catalogAllProducts[i].price) * (Math.abs(parseInt(this.catalogAllProducts[i].sale)) / 100));
             let temp = parseInt(this.catalogAllProducts[i].price) - priceSale;
-            return temp + " BYN";
+            return temp;
         }
         else return this.catalogAllProducts[i].price;
     }
@@ -309,7 +314,7 @@ class InfoDetailedProduct {
         let nameProduct = document.createElement('div');
         nameProduct.setAttribute("class", "nameProduct");
         nameProduct.innerHTML +=
-            `<p>${this.catalogAllProducts[i].name}</p>`
+            `<p>${this.catalogAllProducts[i].name}</p>`;
         return nameProduct;
     }
     getPaintSliderProduct(sliderImage) {
@@ -341,6 +346,7 @@ class InfoDetailedProduct {
 
         return sliderImage;
     }
+
     pressPictureSlide(imageSlider) {
         document.getElementById('bigImage').style.backgroundImage = `url('${imageSlider[0]}')`;
         for (let i = 0; i < imageSlider.length; i++) {
@@ -349,6 +355,7 @@ class InfoDetailedProduct {
             })
         };
     }
+
     paintFastInfoProduct(i) {
 
         /* console.log(i); */
@@ -361,19 +368,29 @@ class InfoDetailedProduct {
             let countdown = new Countdown(catalogProducts[i].timeSale, `.fastInfoProduct`, i);
         }
 
+        let products = [];
+        let textButton = "Купить";
+        products = JSON.parse(localStorage.getItem("StoreProducts"));
+        for (let a = 0; a < products.length; a++) {
+            //console.log(products[a]);
+            if (products[a] === catalogProducts[i].id) {
+                textButton = "В корзине!";
+            }
+        }
+
         if (true) {
             document.querySelector(".fastInfoProduct").innerHTML +=
                 `<div class="wraperInfoPrice">
                 <div class="infoPrice">
                     <div>
-                        <div class="realPrice">${catalogProducts[i].price}</div>
+                        <div class="realPrice">${catalogProducts[i].price} BYN</div>
                         <div class="sale">${catalogProducts[i].sale}</div>
                     </div>
-                    <div class="price">${mainSlider.sale(i)}</div>
+                    <div class="price">${mainSlider.sale(i)} BYN</div>
                 </div>
                 <div>
                     <div class="saving">Экономия: ${parseInt(this.catalogAllProducts[i].price) * (Math.abs(parseInt(this.catalogAllProducts[i].sale)) / 100)} BYN</div>
-                    <div class="pay"><button>В корзину</button></div>
+                    <div class="pay"><button id="inBasket">${textButton}</button></div>
                 </div>
             </div>
             <div class="wraperinfo">
@@ -386,6 +403,20 @@ class InfoDetailedProduct {
             </div>`;
         }
         this.paintDtailFullProduct(i);
+
+        document.getElementById('inBasket').addEventListener('click', function () {
+            if (textButton === "В корзине!") {
+                basket.opacityDiv();
+                basket.workCart();
+            }
+            else {
+                products.push(catalogProducts[i].id);
+                localStorage.setItem("StoreProducts", JSON.stringify(products));
+                document.getElementById('counter_products').innerHTML = products.length;
+                textButton = "В корзине!";
+                document.getElementById('inBasket').innerHTML = textButton;
+            }
+        });
     }
 
     paintDtailFullProduct(i) {
@@ -409,11 +440,11 @@ class InfoDetailedProduct {
 class Basket {
     constructor() {
         this.pressBasket();
-        this.getArrCart();
+        //this.getArrCart();
     }
 
     getArrCart() {
-        let productsInCart = JSON.parse(localStorage.getItem("StoreProducts"));
+        let productsInCart = store.getProducts();/* JSON.parse(localStorage.getItem("StoreProducts")); */
         let arrCart = [];
         for (let i = 0; i < productsInCart.length; i++) {
             for (let j = 0; j < catalogProducts.length; j++) {
@@ -443,6 +474,8 @@ class Basket {
     opacityDiv() {
         document.getElementById('container_carousel').innerHTML = "";
         document.getElementById('container_products').style.display = 'none';
+        document.querySelector('.container_products').innerHTML = "";
+        document.querySelector('.products_vert').innerHTML = "";
         document.getElementById('infoProduct').innerHTML = "";
         document.getElementById('container_authorization').style.display = "none";
     }
@@ -450,7 +483,11 @@ class Basket {
 
     workCart() {
         let products = this.getArrCart();
+
+        //console.log(products);
+
         let cart = document.getElementById('cart');
+        let total = document.createElement("div");
 
         //console.log(productsInCart.length);
 
@@ -459,71 +496,140 @@ class Basket {
             //console.log("Корзина не пуста");
 
             let wrapperCartProduct;
+            let summ = 0;
 
             for (let i = 0; i < products.length; i++) {
+
                 wrapperCartProduct = document.createElement('div');
                 wrapperCartProduct.setAttribute("class", "wrapperCartProduct");
 
                 //console.log(products[i].image);
-
                 wrapperCartProduct.innerHTML =
-                    `<div class="wrapperImg">
+                    `<div class="wrapperImg" id="wrapperImg_${products[i].id}">
                         <img src="${products[i].image}" />
                     </div>
                     <p>${products[i].name}</p>
-                    <div class="addProductSubtract">
-                        <div class="plus"><i class="fas fa-plus-square" data-articul="${products[i].id}"></i></div>
-                        <div><span id="${products[i].id}">${products[i].quantity}</span></div>
-                        <div class="minus"><i class="fas fa-minus-square" data-articul="${products[i].id}"></i></div>
-                    </div>
-                    <div class="priceCartProduct" id="price${products[i].id}">${products[i].price} BYN</div>`;
+                    <div class="divPriceProduct">
+                        <div class="addProductSubtract">
+                            <div class="plus" id="plus_${products[i].id}"><i class="fas fa-plus-square" data-articul="${products[i].id}"></i></div>
+                            <div><span id="quantity_${products[i].id}">${products[i].quantity}</span></div>
+                            <div class="minus" id="minus_${products[i].id}"><i class="fas fa-minus-square" data-articul="${products[i].id}"></i></div>
+                        </div>
+                        <div class="priceCartProduct" id="price_${products[i].id}">${products[i].price} BYN</div>
+                        <div class="del" id="del_${products[i].id}"><i class="fas fa-times-circle" data-id="del_${products[i].id}"></i></div>
+                    </div>`;
+
+                total.setAttribute("class", "total");
+                total.innerHTML = `Итого: <span id="summ">${summ += products[i].price}</span> BYN`
+
                 cart.appendChild(wrapperCartProduct);
             }
+            cart.appendChild(total);
             this.pressPlusMinus(products);
         }
         else {
-            console.log("Корзина пуста");
+            //console.log("Корзина пуста");
+            cart.innerHTML = `<div class="emptyBasket"><h2>Ваша корзина пуста.</h2></div>`;
         }
+        //console.log(products);
+
+        this.pressProductCard(products);
+    }
+
+    pressProductCard(products) {
+        for (let i = 0; i < products.length; i++) {
+            document.getElementById(`wrapperImg_${products[i].id}`).addEventListener("click", function () {
+                //console.log(products[i].id);
+                for (let j = 0; j < catalogProducts.length; j++) {
+                    if (products[i].id === catalogProducts[j].id) {
+                        //console.log(products[i].id);
+                        //console.log(catalogProducts[j].id);
+
+                        let infoDetailedProduct = new InfoDetailedProduct(catalogProducts, j, catalogProducts[j].imageSlider);
+                        document.getElementById('cart').innerHTML = '';
+                    }
+                }
+            })
+        };
     }
 
     pressPlusMinus(products) {
-        document.addEventListener('click', (event) => {
-            if (event.target.classList.contains("fa-plus-square")) {
-                basket.plus(event.target.dataset.articul, products);
-            }
-            if (event.target.classList.contains("fa-minus-square")) {
-                basket.minus(event.target.dataset.articul, products);
-            }
-        })
+
+        for (let i = 0; i < products.length; i++) {
+            document.querySelector(`#plus_${products[i].id}`).addEventListener('click', (event) => {
+                if (event.target.classList.contains("fa-plus-square")) {
+                    basket.plus(event.target.dataset.articul, products);
+                }
+            })
+
+            document.querySelector(`#minus_${products[i].id}`).addEventListener('click', (event) => {
+                if (event.target.classList.contains("fa-minus-square")) {
+                    basket.minus(event.target.dataset.articul, products);
+                }
+            })
+
+            document.querySelector(`#del_${products[i].id}`).addEventListener('click', (event) => {
+                //console.log(event.target.classList.contains("fa-times-circle"));
+                if (event.target.classList.contains("fa-times-circle")) {
+                    basket.deleteCart(event.target.dataset.id.slice(4), products);
+                }
+            })
+        }
     }
 
     plus(id, products) {
+        let sum = 0;
         for (let i = 0; i < products.length; i++) {
             if (products[i].id === id) {
                 if (products[i].quantity !== 5) {
                     products[i].quantity += 1;
                 }
-                document.getElementById(`price${products[i].id}`).innerText = `${products[i].price * products[i].quantity} BYN`;
-                document.getElementById(id).innerText = `${products[i].quantity}`;
+                document.getElementById(`price_${products[i].id}`).innerText = `${products[i].price * products[i].quantity} BYN`;
+                document.getElementById(`quantity_${id}`).innerText = `${products[i].quantity}`;
             }
         }
+        for (let i = 0; i < products.length; i++) {
+            sum += products[i].price * products[i].quantity;
+        }
+        document.getElementById(`summ`).innerText = sum;
     }
 
     minus(id, products) {
+        let sum = 0;
         for (let i = 0; i < products.length; i++) {
             if (products[i].id === id) {
                 if (products[i].quantity !== 1) {
                     products[i].quantity -= 1;
                 }
-                document.getElementById(`price${products[i].id}`).innerText = `${products[i].price * products[i].quantity} BYN`;
-                document.getElementById(id).innerText = `${products[i].quantity}`;
+                document.getElementById(`price_${products[i].id}`).innerText = `${products[i].price * products[i].quantity} BYN`;
+                document.getElementById(`quantity_${id}`).innerText = `${products[i].quantity}`;
             }
         }
+        for (let i = 0; i < products.length; i++) {
+            sum += products[i].price * products[i].quantity;
+        }
+        document.getElementById(`summ`).innerText = sum;
+    }
+
+    deleteCart(id, products) {
+        let temp = [];
+        for (let i = 0; i < products.length; i++) {
+            temp.push(products[i].id);
+        }
+        for (let i = 0; i < temp.length; i++) {
+            if (temp[i] === id) {
+                temp.splice(i, 1);
+            }
+        }
+        localStorage.setItem("StoreProducts", JSON.stringify(temp));
+        document.getElementById('counter_products').innerHTML = temp.length;
+        document.querySelector('#cart').innerHTML = "";
+        basket.workCart();
     }
 }
 
 let basket = new Basket();
-/*basket.opacityDiv();
+basket.opacityDiv();
 basket.workCart();
- */
+
 //console.log(basket.arrCart());

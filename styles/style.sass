@@ -409,31 +409,56 @@
         .detailFullProduct
             margin-top: 50px
     .cart
+        .emptyBasket
+            text-align: center
         .wrapperCartProduct
-            display: flex
-            justify-content: start
-            align-items: center
-            width: 100%
-            .wrapperImg
-                width: 300px
-                img
-                    max-width: 100%
-        p
-            font-size: 25px
-            font-weight: 500
-            padding: 0 50px
-        .addProductSubtract
             display: flex
             justify-content: space-between
             align-items: center
-            width: 80px
-            .plus, .minus
+            width: 100%
+            height: 110px
+            padding: 5px 0
+            .wrapperImg
+                width: 250px
+                overflow: hidden
+                height: 110px
+                img
+                    position: relative
+                    max-width: 100%
+            p
                 font-size: 25px
-                cursor: pointer
-            .plus
-                color: green
-            .minus
-                color: red
+                font-weight: 500
+                padding: 0 50px
+            .divPriceProduct
+                width: 210px
+                display: flex
+                justify-content: space-between
+                align-items: center
+                .addProductSubtract
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+                    width: 80px
+                    .plus, .minus
+                        font-size: 25px
+                        cursor: pointer
+                    .plus
+                        color: green
+                    .minus
+                        color: red
+                .priceCartProduct
+                    font-size: 20px
+                    font-weight: 500
+                .exit
+                    position: relative
+                    right: 0px
+        .total
+            border-top: 1px solid black
+            text-align: end
+            font-size: 20px
+            font-weight: 500
+            padding-top: 10px
+            margin-top: 10px
             
 .footer
     width: 100%

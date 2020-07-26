@@ -5,6 +5,11 @@ document.getElementById('logo').addEventListener('click', () => {
     document.getElementById('infoProduct').innerHTML = '';
     mainSlider = new MainSlider(catalogProducts);
     document.getElementById('container_products').style.display = 'flex';
+    let allProducts = new AllProducts(
+        ".container_products",
+        catalogProducts,
+        ".counter_products"
+    );
     document.getElementById('cart').innerHTML = "";
 });
 
